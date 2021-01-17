@@ -4,7 +4,7 @@
     <meta content="">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
      <link rel="stylesheet" type="text/css" href="main.css">
-    <title>Список лабораторных работ Ефимов Ю. А.</title>
+    <title>Список лабораторных работ Ефимов Ю.А.</title>
   </head>
   <body>
     <ul id="nav">
