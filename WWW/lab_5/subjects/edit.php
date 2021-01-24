@@ -7,17 +7,18 @@
 <html lang="ru" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Изменение данных предмета. Ефимов</title>
+    <title>Изменение данных студента. Ефимов</title>
   </head>
   <body>
 
 <?php
+    $id_user=$_GET["id"];
 
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     $mysqli = mysqli_connect("localhost", "f0504416_user", "root", "f0504416_user");
     mysqli_set_charset($mysqli, "utf8mb4");
 
-    $dat = mysqli_query($mysqli,"SELECT * FROM subjects");
+    $dat = mysqli_query($mysqli,"SELECT * FROM subjects WHERE id='$id_user'");
 
     if ($dat){
         // Для каждой строки из запроса
@@ -26,62 +27,23 @@
             $fio = $row['fio'];
             $id=$row['id'];
         }}
-//Изменение названия
-    if (isset($data['change_name'])) {
-      if ($data['name']=='') {
-        $errors[]='Введите новое название';
-      }
-      if ($data['name']==$name) {
-        $errors[]='Такое название уже стоит';
-      }
-      if(empty($errors)){
-        echo 'Вы успешно изменили название предмета';
-        $query="UPDATE subjects SET name='$data[name]' WHERE id=$id";
-        $result=mysqli_query($mysqli, $query);
-        $name=$data['name'];
-        if (!mysqli_query($mysqli, $query)) {
-      echo "Что-то не то $query".mysql_error()."<br><br>";
-      $result = mysqli_query($query);
-    }}
-else {
-      echo array_shift($errors);
-    }
-}
-
-//Изменение жанра
-if (isset($data['change_fio'])) {
-  if ($data['fio']=='') {
-    $errors[]='Введите ФИО преподавателя';
-  }
-  if ($data['fio']==$fio) {
-    $errors[]='Такое ФИО преподавателя уже стоит';
-  }
-  if(empty($errors)){
-    echo 'Вы успешно изменили ФИО преподавателя';
-    $query="UPDATE subjects SET fio='$data[fio]' WHERE id=$id";
-    $result=mysqli_query($mysqli, $query);
-    $fio=$data['fio'];
-    if (!mysqli_query($mysqli, $query)) {
-  echo "Что-то не то $query".mysql_error()."<br><br>";
-  $result = mysqli_query($query);
-}}
-else {
-  echo array_shift($errors);
-  }
-}
 
 ?>
-<form class="" action="" method="post">
+<form class="" action="save_all.php" method="post">
   <p>
-  <input type="text" name="name"  value='<?=$name?>'>
-  <button type="submit" name="change_name">Изменить название предмета</button>
+  <label for="name">Название предмета</label>
+  <input type="text" id="name" name="name"  value='<?=$name?>'>
   </p>
   <p>
-  <input type="text" name="fio" value='<?=$fio?>'>
-  <button type="submit" name="change_fio">Изменить ФИО</button>
+  <label for="fio">ФИО преподавателя</label>
+  <input type="text" id="fio" name="fio" value='<?=$fio?>'>
   </p>
+  <input type="hidden" name="id" value="<?=$id?>">
+  <button type="submit" name="change_all">Сохранить</button>
 </form>
 
-<p><a href="../subjects/subjects.php">Назад к сведениям</a></p>
+
+
+<p><a href="student.php">Назад к сведениям</a></p>
 </body>
 </html>
