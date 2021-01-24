@@ -11,7 +11,7 @@
     $result = $mysqli->query("SELECT
         students.fio as students_fio,
         students.faculty as students_faculty,
-        students.group as students_group,
+        students.groups as students_group,
         students.num as students_num,
         subjects.name as subjects_name,
         subjects.fio as subjects_fio,
